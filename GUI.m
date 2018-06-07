@@ -36,28 +36,88 @@ lblEleccion = uicontrol (gp, "style", "text", "string", "Elegir Método Númerico"
 % create a buttons in the group
 b1 = uicontrol (gp, "style", "radiobutton", ...
                 "string", "Método de Euler", ...
-                "Position", [ 40 108 150 30 ]);
+                "Position", [ 40 108 150 30 ], "HandleVisibility","off","Tag", "1");
 b2 = uicontrol (gp, "style", "radiobutton", ...
                 "string", "Método del Punto Medio", ...
-                "Position", [ 40 81 175 30 ]);
+                "Position", [ 40 81 175 30 ], "HandleVisibility","off","Tag", "2");
 b3 = uicontrol (gp, "style", "radiobutton", ...
                 "string", "Método de Heun", ...
-                "Position", [ 40 54 150 30]);
+                "Position", [ 40 54 150 30], "HandleVisibility","off","Tag", "3");
 b4 = uicontrol (gp, "style", "radiobutton", ...
-                "string", "Método de Runge-Kutta", ...
-                "Position", [ 40 27 175 30]);
+                "string", "Método de EulerModificado", ...
+                "Position", [ 40 27 175 30], "HandleVisibility","off","Tag", "4");
 b5 = uicontrol (gp, "style", "radiobutton", ...
                 "string", "Todos los anteriores", ...
-                "Position", [ 40 0 225 30 ]);
+                "Position", [ 40 0 225 30 ], "HandleVisibility","off","Tag", "5");
 
 
 
           % create figure without a default toolbar
           
 % create a button (default style)
-b1 = uicontrol (f, "string", "Resolver", "position",[250 10 150 40]);
+b1 = uicontrol (f, "string", "Resolver", "position",[250 10 150 40], "ButtonDownFcn", {@metodos});
 b2 = uicontrol (f, "string", "Ver gráficos", "position",[420 10 150 40]);
 
+
+%[T, L_X] = table (X)
+%[T, Valor, Error] = table (2, 4);
+%fprinf('\n ti,wi,yi=y(ti), Error')
+function metodos(src,ev)
+        switch get(get(gp,'SelectedObject'),'Tag')
+            case '1',  @Euler;
+            case '2',  @PuntoMedio;
+            case '3',  @EulerModificado;
+            case '4',  @Heun;
+            #otherwise, res = '';
+        end
+        set(hEdit3, 'String',res)
+    end
+
+function [t w]=Euler(txtInferior,txtSperior,txtIte,txtPuntoInicial)
+  h=(txtSperior-txtInferior)/txtIte;
+  t(1)=txtInferior;
+  w(1)=txtPuntoInicial;
+  for i=1:txtIte
+    w(i+1)=w(i)+h*f(t(i),w(i));
+    t(i+1)=txtInferior+i*h;
+  endfor
+endfunction
+
+function [t w]=PuntoMedio(txtInferior,txtSperior,txtIte,txtPuntoInicial)
+  h=(txtSperior-txtInferior)/txtIte;
+  t(1)=txtInferior;
+  w(1)=txtPuntoInicial;
+  for i=1:txtIte
+    k=f(t(i),w(i));
+    c=h/2;
+    w(i+1)=w(i)+h*f(t(i)+c,w(i)+c*k);
+    t(i+1)=txtInferior+i*h;
+  endfor
+endfunction
+
+function [t w]=EulerModificado(txtInferior,txtSperior,txtIte,txtPuntoInicial)
+  h=(txtSperior-txtInferior)/txtIte;
+  t(1)=txtInferior;
+  w(1)=txtPuntoInicial;
+  for i=1:txtIte
+    k=h*f(t(i),w(i))
+    c=h/2;
+    w(i+1)=w(i)+c*(f(t(i),w(i))+f(t(i),y(i)+k));
+    t(i+1)=txtInferior+i*h;
+  endfor
+endfunction
+  
+function [t, w]=Heun(txtInferior,txtSperior,txtIte,txtPuntoInicial)
+  h=(txtSperior-txtInferior)/txtIte;
+  t(1)=txtInferior;
+  w(1)=txtPuntoInicial;
+  for i=1:txtIte
+    k=(2/3)*h*f(t(i),w(i))
+    c=h/4;
+    w(i+1)=w(i)+c*(f(t(i),w(i))+3*f(t(i)+ (2/3)*h,w(i)+k));
+    t(i+1)=txtInferior+i*h;
+  endfor
+endfunction  
 
 %[T, L_X] = table (X)
 %[T, Valor, Error] = table (2, 4);
