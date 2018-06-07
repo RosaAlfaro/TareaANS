@@ -1,20 +1,20 @@
-f = dialog ("name", "Ecuación Deferencial No Lineal", "position", [300 200 800 420]);
+f = dialog ("name", "Ecuación Deferencial No Lineal", "position", [250 180 825 420]);
 
-gp1 = uibuttongroup (f, "Position", [ 0.09 0.47 0.6 0.4]);
-lblTema = uicontrol (f, "style", "text", "string", "SOLUCIÓN NUMÉRICA DE LA ECUACIÓN DIFERENCIAL NO LINEAL QUE DESCRIBE LAS OSCILACIONES DEL PÉNDULO SIMPLE ", "position",[0 370 800 80]);
+gp1 = uibuttongroup (f, "Position", [ 0.05 0.47 0.55 0.4]);
+lblTema = uicontrol (f, "style", "text", "string", "SOLUCIÓN NUMÉRICA DE LA ECUACIÓN DIFERENCIAL NO LINEAL QUE DESCRIBE LAS OSCILACIONES DEL PÉNDULO SIMPLE ", "position",[7 367 800 70]);
 lblIngresar = uicontrol (gp1, "style", "text", "string", "Ingresar Datos", "position",[0 135 120 30]);
-lblLongitud = uicontrol (gp1, "style", "text", "string", "Longitud:", "position",[0 108 120 22]);
-txtLongitud = uicontrol (gp1, "style", "edit", "position",[150 108 120 22]);
-lblGravedad = uicontrol (gp1, "style", "text", "string", "Gravedad:", "position",[0 81 120 22]);
-txtGravedad = uicontrol (gp1, "style", "edit", "position",[150 81 120 22]);
-lblInferior = uicontrol (gp1, "style", "text", "string", "Límite inferior:", "position",[0 54 120 22]);
-txtInferior = uicontrol (gp1, "style", "edit", "position",[150 54 120 22]);
-lblSuperior = uicontrol (gp1, "style", "text", "string", "Límite superior:", "position",[0 27 120 22]);
-txtSperior = uicontrol (gp1, "style", "edit", "position",[150 27 120 22]);
-lblIte = uicontrol (gp1, "style", "text", "string", "Número de iteraciones:", "position",[0 0 120 22]);
-txtIte = uicontrol (gp1, "style", "edit", "position",[150 0 120 22]);
-lblPuntoInicial = uicontrol (gp1, "style", "text", "string", "Valor de y evaluado en el límite inferior:", "position",[0 27 120 22]);
-txtPuntoInicial = uicontrol (gp1, "style", "edit", "position",[300 180 100 20]);
+lblLongitud = uicontrol (gp1, "style", "text", "string", "Longitud:", "position",[0 95 120 22]);
+txtLongitud = uicontrol (gp1, "style", "edit", "position",[125 95 80 22]);
+lblGravedad = uicontrol (gp1, "style", "text", "string", "Gravedad:", "position",[0 60 120 22]);
+txtGravedad = uicontrol (gp1, "style", "edit", "position",[125 60 80 22]);
+lblIte = uicontrol (gp1, "style", "text", "string", "N° de iteraciones:", "position",[0 25 120 22 ]);
+txtIte = uicontrol (gp1, "style", "edit", "position",[125 25 80 22 ]);
+lblInferior = uicontrol (gp1, "style", "text", "string", "Límite inferior:", "position",[225 95 120 22]);
+txtInferior = uicontrol (gp1, "style", "edit", "position",[350 95 80 22]);
+lblSuperior = uicontrol (gp1, "style", "text", "string", "Límite superior:", "position",[225 60 120 22]);
+txtSperior = uicontrol (gp1, "style", "edit", "position",[350 60 80 22]);
+lblPuntoInicial = uicontrol (gp1, "style", "text", "string", "Valor inicial:", "position",[225 25 120 22]);
+txtPuntoInicial = uicontrol (gp1, "style", "edit", "position",[350 25 80 22 ]);
 
 
 
@@ -31,7 +31,7 @@ txtPuntoInicial = uicontrol (gp1, "style", "edit", "position",[300 180 100 20]);
 
 %Inicio
 
-gp = uibuttongroup (f, "Position", [ 0.7 0.47 0.3 0.4]);
+gp = uibuttongroup (f, "Position", [ 0.65 0.47 0.29 0.4]);
 lblEleccion = uicontrol (gp, "style", "text", "string", "Elegir Método Númerico", "position",[20 135 150 30]);
 % create a buttons in the group
 b1 = uicontrol (gp, "style", "radiobutton", ...
